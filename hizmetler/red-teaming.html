@@ -63,7 +63,88 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 <div class="relative">
                     <div class="absolute -top-4 -left-4 w-24 h-24 border-t-2 border-l-2 border-maroon opacity-30"></div>
-                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800" class="rounded-2xl shadow-2xl border border-white/10 relative z-10" alt="Red Teaming Nedir">
+                    <svg viewBox="0 0 500 340" xmlns="http://www.w3.org/2000/svg" class="w-full rounded-2xl shadow-2xl border border-white/10 relative z-10" style="background:#0e0e0e; min-height:300px;">
+                        <defs>
+                            <pattern id="grid3" width="30" height="30" patternUnits="userSpaceOnUse">
+                                <path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgba(109,19,41,0.1)" stroke-width="0.8"/>
+                            </pattern>
+                        </defs>
+                        <rect width="500" height="340" fill="url(#grid3)"/>
+
+                        <!-- Terminal window -->
+                        <rect x="40" y="50" width="230" height="240" rx="8" fill="#0d0d0d" stroke="#2a2a2a" stroke-width="1.5"/>
+                        <!-- Terminal titlebar -->
+                        <rect x="40" y="50" width="230" height="28" rx="8" fill="#1a1a1a"/>
+                        <rect x="40" y="64" width="230" height="14" fill="#1a1a1a"/>
+                        <circle cx="58" cy="64" r="5" fill="#6d1329" opacity="0.8"/>
+                        <circle cx="74" cy="64" r="5" fill="#555" opacity="0.6"/>
+                        <circle cx="90" cy="64" r="5" fill="#555" opacity="0.6"/>
+                        <text x="155" y="69" text-anchor="middle" fill="#444" font-family="monospace" font-size="9">terminal</text>
+
+                        <!-- Terminal text lines -->
+                        <text x="55" y="100" fill="#6d1329" font-family="monospace" font-size="10">$ nmap -sV target.corp</text>
+                        <text x="55" y="118" fill="#555" font-family="monospace" font-size="9">Scanning 192.168.1.0/24...</text>
+                        <text x="55" y="134" fill="#16a34a" font-family="monospace" font-size="9">PORT   STATE  SERVICE</text>
+                        <text x="55" y="150" fill="#555" font-family="monospace" font-size="9">22/tcp open   ssh</text>
+                        <text x="55" y="164" fill="#555" font-family="monospace" font-size="9">80/tcp open   http</text>
+                        <text x="55" y="178" fill="#6d1329" font-family="monospace" font-size="9">443/tcp open  https ⚠</text>
+                        <text x="55" y="196" fill="#6d1329" font-family="monospace" font-size="10">$ exploit --cve 2024-1337</text>
+                        <text x="55" y="212" fill="#16a34a" font-family="monospace" font-size="9">[+] Shell obtained!</text>
+                        <text x="55" y="228" fill="#555" font-family="monospace" font-size="10">$ whoami</text>
+                        <text x="55" y="244" fill="#16a34a" font-family="monospace" font-size="9">root</text>
+                        <!-- blinking cursor -->
+                        <rect x="55" y="252" width="8" height="12" fill="#6d1329">
+                            <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/>
+                        </rect>
+
+                        <!-- Attack vector arrows pointing to target -->
+                        <!-- Arrow 1: from terminal -->
+                        <line x1="270" y1="170" x2="340" y2="170" stroke="#6d1329" stroke-width="1.5" stroke-dasharray="5 3">
+                            <animate attributeName="opacity" values="1;0.3;1" dur="1.5s" repeatCount="indefinite"/>
+                        </line>
+                        <polygon points="340,165 350,170 340,175" fill="#6d1329"/>
+
+                        <!-- Arrow 2: top -->
+                        <line x1="370" y1="80" x2="370" y2="135" stroke="#6d1329" stroke-width="1" stroke-dasharray="4 3" opacity="0.5">
+                            <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" begin="0.3s" repeatCount="indefinite"/>
+                        </line>
+                        <polygon points="365,135 370,145 375,135" fill="#6d1329" opacity="0.5"/>
+
+                        <!-- Arrow 3: bottom -->
+                        <line x1="370" y1="260" x2="370" y2="210" stroke="#6d1329" stroke-width="1" stroke-dasharray="4 3" opacity="0.4">
+                            <animate attributeName="opacity" values="0.4;0.9;0.4" dur="2.2s" begin="0.7s" repeatCount="indefinite"/>
+                        </line>
+                        <polygon points="365,210 370,200 375,210" fill="#6d1329" opacity="0.4"/>
+
+                        <!-- Target building (the corp) -->
+                        <rect x="350" y="145" width="110" height="90" rx="6" fill="#141414" stroke="#2a2a2a" stroke-width="1.5"/>
+                        <!-- Windows -->
+                        <rect x="362" y="158" width="16" height="12" rx="2" fill="#1a1a2e" stroke="#333" stroke-width="1"/>
+                        <rect x="384" y="158" width="16" height="12" rx="2" fill="#1a1a2e" stroke="#333" stroke-width="1"/>
+                        <rect x="406" y="158" width="16" height="12" rx="2" fill="#6d1329" stroke="#6d1329" stroke-width="1" opacity="0.7">
+                            <animate attributeName="opacity" values="0.7;0.2;0.7" dur="1.2s" repeatCount="indefinite"/>
+                        </rect>
+                        <rect x="428" y="158" width="16" height="12" rx="2" fill="#1a1a2e" stroke="#333" stroke-width="1"/>
+                        <rect x="362" y="178" width="16" height="12" rx="2" fill="#1a1a2e" stroke="#333" stroke-width="1"/>
+                        <rect x="384" y="178" width="16" height="12" rx="2" fill="#1a1a2e" stroke="#333" stroke-width="1"/>
+                        <rect x="406" y="178" width="16" height="12" rx="2" fill="#1a1a2e" stroke="#333" stroke-width="1"/>
+                        <rect x="428" y="178" width="16" height="12" rx="2" fill="#6d1329" stroke="#6d1329" stroke-width="1" opacity="0.5">
+                            <animate attributeName="opacity" values="0.5;0.1;0.5" dur="1.8s" begin="0.5s" repeatCount="indefinite"/>
+                        </rect>
+                        <!-- Door -->
+                        <rect x="392" y="205" width="22" height="30" rx="2" fill="#1a1a1a" stroke="#333" stroke-width="1"/>
+
+                        <!-- Skull / target icon above building -->
+                        <circle cx="405" cy="105" r="22" fill="none" stroke="#6d1329" stroke-width="1.5" stroke-dasharray="4 2" opacity="0.6">
+                            <animate attributeName="r" values="22;28;22" dur="2s" repeatCount="indefinite"/>
+                            <animate attributeName="opacity" values="0.6;0;0.6" dur="2s" repeatCount="indefinite"/>
+                        </circle>
+                        <text x="405" y="112" text-anchor="middle" fill="#6d1329" font-family="Inter,sans-serif" font-size="22">🎯</text>
+
+                        <!-- Label -->
+                        <rect x="158" y="305" width="184" height="22" rx="4" fill="rgba(109,19,41,0.12)" stroke="rgba(109,19,41,0.25)" stroke-width="1"/>
+                        <text x="250" y="320" text-anchor="middle" fill="#6d1329" font-family="Inter,sans-serif" font-size="9" font-weight="700" letter-spacing="2">RED TEAMING</text>
+                    </svg>
                     <div class="absolute -bottom-4 -right-4 w-24 h-24 border-b-2 border-r-2 border-maroon opacity-30"></div>
                 </div>
                 <div>
