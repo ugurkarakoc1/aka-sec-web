@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog — AKA Security</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        maroon: { DEFAULT: '#6d1329', dark: '#4a0d1c' },
+                        darkBg: '#050505',
+                        cardBg: '#121212',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #050505;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Particle canvas */
+        #canvas {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.35;
+        }
+
+        /* Grid overlay */
+        .grid-bg {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background-image:
+                linear-gradient(rgba(109,19,41,0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(109,19,41,0.05) 1px, transparent 1px);
+            background-size: 44px 44px;
+        }
+
+        /* Glow orbs */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(80px);
+        }
+        .orb-1 {
+            width: 500px; height: 500px;
+            top: -150px; right: -100px;
+            background: radial-gradient(circle, rgba(109,19,41,0.22) 0%, transparent 70%);
+            animation: drift1 8s ease-in-out infinite;
+        }
+        .orb-2 {
+            width: 400px; height: 400px;
+            bottom: -120px; left: -80px;
+            background: radial-gradient(circle, rgba(109,19,41,0.15) 0%, transparent 70%);
+            animation: drift2 10s ease-in-out infinite;
+        }
+        @keyframes drift1 {
+            0%,100% { transform: translate(0,0); }
+            50%      { transform: translate(-30px, 30px); }
+        }
+        @keyframes drift2 {
+            0%,100% { transform: translate(0,0); }
+            50%      { transform: translate(20px, -25px); }
+        }
+
+        /* Content */
+        .content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 2rem;
+            max-width: 640px;
+        }
+
+        /* Shield icon animation */
+        .shield-wrap {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 88px; height: 88px;
+            border-radius: 24px;
+            background: rgba(109,19,41,0.12);
+            border: 1px solid rgba(109,19,41,0.3);
+            margin-bottom: 2rem;
+            animation: pulse-ring 3s ease-in-out infinite;
+        }
+        @keyframes pulse-ring {
+            0%,100% { box-shadow: 0 0 0 0 rgba(109,19,41,0.3); }
+            50%      { box-shadow: 0 0 0 16px rgba(109,19,41,0); }
+        }
+
+        /* Progress bar */
+        .progress-bar {
+            height: 3px;
+            background: rgba(255,255,255,0.07);
+            border-radius: 99px;
+            overflow: hidden;
+            margin: 2rem auto;
+            width: 100%;
+        }
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #6d1329, #b52040, #6d1329);
+            background-size: 200% 100%;
+            border-radius: 99px;
+            animation: fillProgress 3s cubic-bezier(.4,0,.2,1) forwards,
+                       shimmer 2s linear 1s infinite;
+        }
+        @keyframes fillProgress {
+            to { width: 72%; }
+        }
+        @keyframes shimmer {
+            0%   { background-position: 100% 0; }
+            100% { background-position: -100% 0; }
+        }
+
+        /* Typewriter cursor */
+        .cursor {
+            display: inline-block;
+            width: 2px; height: 1em;
+            background: #6d1329;
+            margin-left: 2px;
+            vertical-align: text-bottom;
+            animation: blink .7s steps(1) infinite;
+        }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+        /* Tag badges */
+        .tag {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-size: 10px; font-weight: 700; letter-spacing: .08em;
+            text-transform: uppercase;
+            padding: 6px 12px; border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #6b7280;
+        }
+        .tag-dot { width: 6px; height: 6px; border-radius: 50%; background: #6d1329; }
+
+        /* Back button */
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 13px; font-weight: 600;
+            color: #6b7280;
+            text-decoration: none;
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 10px 20px; border-radius: 8px;
+            transition: color .2s, border-color .2s, background .2s;
+            margin-top: 2.5rem;
+        }
+        .back-btn:hover {
+            color: white;
+            border-color: rgba(109,19,41,0.5);
+            background: rgba(109,19,41,0.08);
+        }
+
+        /* Fade-up entrance */
+        @keyframes fadeUp {
+            from { opacity:0; transform: translateY(28px); }
+            to   { opacity:1; transform: translateY(0); }
+        }
+        .a1 { animation: fadeUp .7s ease .1s both; }
+        .a2 { animation: fadeUp .7s ease .25s both; }
+        .a3 { animation: fadeUp .7s ease .4s both; }
+        .a4 { animation: fadeUp .7s ease .55s both; }
+        .a5 { animation: fadeUp .7s ease .7s both; }
+        .a6 { animation: fadeUp .7s ease .85s both; }
+    </style>
+</head>
+<body>
+
+    <!-- Background layers -->
+    <canvas id="canvas"></canvas>
+    <div class="grid-bg"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <!-- Main content -->
+    <div class="content">
+
+        <div class="a1">
+            <div class="shield-wrap mx-auto">
+                <i data-lucide="shield" style="color:#6d1329; width:40px; height:40px;"></i>
+            </div>
+        </div>
+
+        <!-- Bayılmış Karga -->
+        <div class="a1" style="margin-bottom: 1.5rem;">
+            <svg viewBox="0 0 220 180" width="220" height="180" xmlns="http://www.w3.org/2000/svg" style="margin: 0 auto; display:block;">
+                <!-- Gölge -->
+                <ellipse cx="110" cy="168" rx="55" ry="8" fill="rgba(109,19,41,0.18)"/>
+
+                <!-- Kanatlar (açık, düşmüş) -->
+                <path d="M60 120 Q20 100 10 130 Q30 145 70 135 Z" fill="#1a1a1a" stroke="#333" stroke-width="1.5"/>
+                <path d="M160 120 Q200 100 210 130 Q190 145 150 135 Z" fill="#1a1a1a" stroke="#333" stroke-width="1.5"/>
+
+                <!-- Gövde -->
+                <ellipse cx="110" cy="130" rx="45" ry="30" fill="#1e1e1e" stroke="#333" stroke-width="1.5"/>
+
+                <!-- Kuyruk -->
+                <path d="M110 155 Q95 170 85 165 Q100 158 110 155Z" fill="#1a1a1a"/>
+                <path d="M110 155 Q125 170 135 165 Q120 158 110 155Z" fill="#1a1a1a"/>
+                <path d="M110 155 Q110 175 105 172 Q108 162 110 155Z" fill="#222"/>
+
+                <!-- Boyun -->
+                <path d="M90 115 Q110 105 130 115 Q120 125 110 122 Q100 125 90 115Z" fill="#1e1e1e"/>
+
+                <!-- Kafa -->
+                <circle cx="110" cy="100" r="28" fill="#222" stroke="#333" stroke-width="1.5"/>
+
+                <!-- Gaga -->
+                <path d="M135 100 L148 97 L146 103 Z" fill="#6d1329"/>
+                <path d="M135 100 L148 97 L148 100 Z" fill="#4a0d1c"/>
+
+                <!-- Bayılmış gözler (X X) -->
+                <g stroke="#6d1329" stroke-width="2.5" stroke-linecap="round">
+                    <!-- Sol göz X -->
+                    <line x1="97" y1="93" x2="104" y2="100"/>
+                    <line x1="104" y1="93" x2="97" y2="100"/>
+                    <!-- Sağ göz X -->
+                    <line x1="116" y1="93" x2="123" y2="100"/>
+                    <line x1="123" y1="93" x2="116" y2="100"/>
+                </g>
+
+                <!-- Sarı yıldızlar (baş dönüyor) -->
+                <g fill="#f59e0b" opacity="0.9">
+                    <text x="72" y="72" font-size="13" style="animation: spin1 1.5s linear infinite; transform-origin:78px 68px;">★</text>
+                    <text x="138" y="68" font-size="11" style="animation: spin2 1.8s linear infinite; transform-origin:143px 64px;">★</text>
+                    <text x="105" y="62" font-size="9" style="animation: spin1 2s linear infinite reverse; transform-origin:110px 58px;">★</text>
+                </g>
+
+                <!-- Ayaklar (havada) -->
+                <g stroke="#6d1329" stroke-width="2" stroke-linecap="round">
+                    <line x1="95" y1="158" x2="88" y2="165"/>
+                    <line x1="88" y1="165" x2="82" y2="163"/>
+                    <line x1="88" y1="165" x2="86" y2="170"/>
+                    <line x1="88" y1="165" x2="93" y2="170"/>
+
+                    <line x1="125" y1="158" x2="132" y2="165"/>
+                    <line x1="132" y1="165" x2="138" y2="163"/>
+                    <line x1="132" y1="165" x2="134" y2="170"/>
+                    <line x1="132" y1="165" x2="127" y2="170"/>
+                </g>
+
+                <!-- Küçük Zz (uyku) -->
+                <g fill="#9ca3af" font-family="Inter,sans-serif" font-weight="800">
+                    <text x="148" y="88" font-size="14" opacity="0.9">z</text>
+                    <text x="158" y="76" font-size="11" opacity="0.7">z</text>
+                    <text x="166" y="66" font-size="8" opacity="0.5">z</text>
+                </g>
+            </svg>
+        </div>
+
+        <style>
+            @keyframes spin1 { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+            @keyframes spin2 { from{transform:rotate(0deg)} to{transform:rotate(-360deg)} }
+        </style>
+
+        <div class="flex items-center justify-center gap-3 mb-6 a2">
+            <span class="tag"><span class="tag-dot"></span>Yapım Aşamasında</span>
+            <span class="tag">2025 Q3</span>
+        </div>
+
+        <h1 class="text-4xl md:text-5xl font-bold text-white leading-tight mb-4 a3">
+            Blog Yakında<span class="cursor"></span>
+        </h1>
+
+        <p class="text-gray-500 text-base leading-relaxed mb-2 a4">
+            Siber güvenlik dünyasına dair teknik analizler, saha notları ve kurumsal perspektifler hazırlanıyor.
+        </p>
+        <p class="text-gray-600 text-sm a4">
+            Sızma testi metodolojileri, tehdit istihbaratı ve savunma stratejileri üzerine içerikler çok yakında burada olacak.
+        </p>
+
+        <!-- Progress -->
+        <div class="a5">
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            <p class="text-[11px] text-gray-600 font-semibold uppercase tracking-widest">%72 Tamamlandı</p>
+        </div>
+
+        <!-- Upcoming topics -->
+        <div class="grid grid-cols-3 gap-3 mt-8 a5">
+            <div style="background:rgba(109,19,41,0.07); border:1px solid rgba(109,19,41,0.2); border-radius:12px; padding:16px 12px;">
+                <i data-lucide="terminal" style="color:#6d1329; width:20px; height:20px; margin:0 auto 8px;"></i>
+                <p style="font-size:11px; font-weight:700; color:#9ca3af; text-transform:uppercase; letter-spacing:.06em;">Pentest</p>
+            </div>
+            <div style="background:rgba(109,19,41,0.07); border:1px solid rgba(109,19,41,0.2); border-radius:12px; padding:16px 12px;">
+                <i data-lucide="cpu" style="color:#6d1329; width:20px; height:20px; margin:0 auto 8px;"></i>
+                <p style="font-size:11px; font-weight:700; color:#9ca3af; text-transform:uppercase; letter-spacing:.06em;">Tehdit İstihb.</p>
+            </div>
+            <div style="background:rgba(109,19,41,0.07); border:1px solid rgba(109,19,41,0.2); border-radius:12px; padding:16px 12px;">
+                <i data-lucide="eye" style="color:#6d1329; width:20px; height:20px; margin:0 auto 8px;"></i>
+                <p style="font-size:11px; font-weight:700; color:#9ca3af; text-transform:uppercase; letter-spacing:.06em;">SOC & MDR</p>
+            </div>
+        </div>
+
+        <a href="javascript:void(0)" onclick="history.length > 1 ? history.back() : window.location.href='index.html'" class="back-btn a6">
+            <i data-lucide="arrow-left" style="width:15px; height:15px;"></i>
+            Ana Sayfaya Dön
+        </a>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Particle network
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        let W, H, particles = [];
+
+        function resize() {
+            W = canvas.width  = window.innerWidth;
+            H = canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        for (let i = 0; i < 55; i++) {
+            particles.push({
+                x: Math.random() * window.innerWidth,
+                y: Math.random() * window.innerHeight,
+                r: Math.random() * 1.4 + 0.3,
+                vx: (Math.random() - 0.5) * 0.35,
+                vy: (Math.random() - 0.5) * 0.35,
+            });
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, W, H);
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const d  = Math.sqrt(dx*dx + dy*dy);
+                    if (d < 120) {
+                        ctx.strokeStyle = `rgba(109,19,41,${0.4 * (1 - d/120)})`;
+                        ctx.lineWidth = 0.6;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            for (const p of particles) {
+                ctx.fillStyle = 'rgba(109,19,41,0.8)';
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fill();
+                p.x += p.vx; p.y += p.vy;
+                if (p.x < 0) p.x = W;
+                if (p.x > W) p.x = 0;
+                if (p.y < 0) p.y = H;
+                if (p.y > H) p.y = 0;
+            }
+            requestAnimationFrame(draw);
+        }
+        draw();
+    </script>
+</body>
+</html>
