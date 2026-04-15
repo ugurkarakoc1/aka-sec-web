@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mail Security - AKA Security</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { maroon: { DEFAULT: '#6d1329', dark: '#4a0d1c' }, darkBg: '#050505', cardBg: '#121212' }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #050505; color: white; scroll-behavior: smooth; }
+        .service-card:hover img { transform: scale(1.1); }
+        .service-card:hover .overlay { background-color: rgba(109, 19, 41, 0.4); }
+    </style>
+</head>
+<body>
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md py-4 border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <a href="../index.html" class="flex items-center gap-2">
+                <img src="../logo/logo.png" alt="AKA Security Logo" class="h-8 w-auto" referrerPolicy="no-referrer">
+                <span class="text-xl font-bold tracking-tighter text-white">AKA <span class="text-maroon">SECURITY</span></span>
+            </a>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="../index.html" class="text-sm font-medium text-gray-300 hover:text-maroon transition-colors">Ana Sayfa</a>
+                <a href="../index.html#services" class="text-sm font-medium text-white border-b-2 border-maroon pb-1">Hizmetler</a>
+                <button onclick="document.getElementById('teklif-formu').scrollIntoView({behavior: 'smooth'})" class="bg-maroon hover:bg-maroon-dark text-white px-6 py-2 rounded-md text-sm font-semibold transition-all">Teklif Al</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="relative min-h-[70vh] flex items-center pt-20 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=1920" class="w-full h-full object-cover opacity-20" alt="Background">
+            <div class="absolute inset-0 bg-gradient-to-r from-darkBg via-darkBg/90 to-transparent"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative z-10 w-full">
+            <div class="max-w-2xl">
+                <div class="flex items-center gap-2 mb-6">
+                    <span class="w-8 h-[2px] bg-maroon"></span>
+                    <span class="text-maroon font-bold tracking-widest uppercase text-xs">Defansif Güvenlik Hizmetleri</span>
+                </div>
+                <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6 leading-tight">Mail Security <br><span class="text-maroon">Koruma</span> Hizmeti</h1>
+                <p class="text-gray-400 text-lg mb-10 leading-relaxed">Kurumsal iletişim hattınızı oltalama saldırılarına ve zararlı yazılımlara karşı en üst düzeyde koruyoruz.</p>
+                <a href="#teklif-formu" class="inline-block bg-maroon hover:bg-maroon-dark text-white px-10 py-4 rounded-md font-bold transition-all transform hover:-translate-y-1 shadow-lg shadow-maroon/20">TEKLİF AL</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEDİR? -->
+    <section class="py-24 bg-darkBg border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="relative">
+                    <div class="absolute -top-4 -left-4 w-24 h-24 border-t-2 border-l-2 border-maroon opacity-30"></div>
+                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=800" class="rounded-2xl shadow-2xl border border-white/10 relative z-10" alt="Mail Security Nedir">
+                    <div class="absolute -bottom-4 -right-4 w-24 h-24 border-b-2 border-r-2 border-maroon opacity-30"></div>
+                </div>
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-8">Mail Security Hizmeti Nedir?</h2>
+                    <div class="space-y-6 text-gray-400 leading-relaxed">
+                        <p>Mail Security, kurumların en kritik iletişim kanalı olan e-posta sistemlerini siber tehditlere karşı korumayı amaçlayan kapsamlı bir güvenlik çözümüdür.</p>
+                        <p>Saldırganların en çok tercih ettiği yöntem olan oltalama (phishing) saldırıları, zararlı yazılım dağıtımı ve iş e-postası dolandırıcılığı (BEC) gibi tehditler, kurumlar için büyük risk oluşturur.</p>
+                        <p>Bu hizmet kapsamında, e-posta altyapınızın yapılandırması, güvenlik katmanlarının etkinliği ve çalışanların farkındalık düzeyleri analiz edilerek uçtan uca koruma sağlanır.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BİLEŞENLER -->
+    <section class="py-24 bg-black">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-maroon font-bold uppercase tracking-widest text-sm">Gelişmiş Koruma</span>
+                <h2 class="text-4xl font-bold text-white mt-2">Mail Security Bileşenleri</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-cardBg p-8 rounded-2xl border border-white/5 hover:border-maroon/30 transition-all group">
+                    <div class="w-12 h-12 bg-maroon/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-maroon transition-colors">
+                        <i data-lucide="mail-warning" class="text-maroon group-hover:text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4">Phishing Simülasyonu</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Çalışanlara yönelik gerçekçi oltalama saldırıları düzenlenerek farkındalık seviyesi ölçülür.</p>
+                </div>
+                <div class="bg-cardBg p-8 rounded-2xl border border-white/5 hover:border-maroon/30 transition-all group">
+                    <div class="w-12 h-12 bg-maroon/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-maroon transition-colors">
+                        <i data-lucide="shield-check" class="text-maroon group-hover:text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4">Mail Gateway Analizi</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">E-posta güvenlik ağ geçitlerinin (SEG) filtreleme ve engelleme yetenekleri test edilir.</p>
+                </div>
+                <div class="bg-cardBg p-8 rounded-2xl border border-white/5 hover:border-maroon/30 transition-all group">
+                    <div class="w-12 h-12 bg-maroon/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-maroon transition-colors">
+                        <i data-lucide="file-key" class="text-maroon group-hover:text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4">SPF/DKIM/DMARC</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">E-posta kimlik doğrulama protokollerinin doğru yapılandırılması sağlanarak domain güvenliği artırılır.</p>
+                </div>
+                <div class="bg-cardBg p-8 rounded-2xl border border-white/5 hover:border-maroon/30 transition-all group">
+                    <div class="w-12 h-12 bg-maroon/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-maroon transition-colors">
+                        <i data-lucide="search" class="text-maroon group-hover:text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4">İçerik Analizi</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Gelen ve giden e-postaların ekleri ve linkleri zararlı içeriklere karşı taranır.</p>
+                </div>
+                <div class="bg-cardBg p-8 rounded-2xl border border-white/5 hover:border-maroon/30 transition-all group">
+                    <div class="w-12 h-12 bg-maroon/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-maroon transition-colors">
+                        <i data-lucide="user-x" class="text-maroon group-hover:text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4">BEC Koruması</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Üst düzey yönetici taklidi yapılarak gerçekleştirilen dolandırıcılık girişimlerine karşı önlemler alınır.</p>
+                </div>
+                <div class="bg-cardBg p-8 rounded-2xl border border-white/5 hover:border-maroon/30 transition-all group">
+                    <div class="w-12 h-12 bg-maroon/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-maroon transition-colors">
+                        <i data-lucide="bar-chart-3" class="text-maroon group-hover:text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4">Raporlama ve Analiz</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">E-posta trafiğindeki tehdit trendleri ve güvenlik açıkları detaylı olarak raporlanır.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ADIMLAR -->
+    <section class="py-24 bg-darkBg border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl font-bold text-white">Güvenlik Süreci Adımları</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+                <div class="relative z-10 text-center">
+                    <div class="w-20 h-20 bg-cardBg border-2 border-maroon rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-black text-white shadow-xl shadow-maroon/20">01</div>
+                    <h4 class="text-lg font-bold text-white mb-2">Mevcut Durum Analizi</h4>
+                    <p class="text-gray-500 text-sm">E-posta altyapısının ve mevcut güvenlik ayarlarının incelenmesi.</p>
+                </div>
+                <div class="relative z-10 text-center">
+                    <div class="w-20 h-20 bg-cardBg border-2 border-maroon rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-black text-white shadow-xl shadow-maroon/20">02</div>
+                    <h4 class="text-lg font-bold text-white mb-2">Simülasyon ve Test</h4>
+                    <p class="text-gray-500 text-sm">Oltalama testleri ve teknik güvenlik denemelerinin yapılması.</p>
+                </div>
+                <div class="relative z-10 text-center">
+                    <div class="w-20 h-20 bg-cardBg border-2 border-maroon rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-black text-white shadow-xl shadow-maroon/20">03</div>
+                    <h4 class="text-lg font-bold text-white mb-2">Sıkılaştırma</h4>
+                    <p class="text-gray-500 text-sm">Tespit edilen açıkların kapatılması ve protokollerin güncellenmesi.</p>
+                </div>
+                <div class="relative z-10 text-center">
+                    <div class="w-20 h-20 bg-cardBg border-2 border-maroon rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-black text-white shadow-xl shadow-maroon/20">04</div>
+                    <h4 class="text-lg font-bold text-white mb-2">Sürekli İzleme</h4>
+                    <p class="text-gray-500 text-sm">Yeni nesil tehditlere karşı sistemin sürekli güncel tutulması.</p>
+                </div>
+                <div class="hidden md:block absolute top-10 left-0 w-full h-[2px] bg-maroon/20 -z-0"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAYDALAR -->
+    <section class="py-24 bg-black">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-white">Hizmetin Faydaları</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="flex gap-6 p-6 rounded-xl bg-cardBg border border-white/5">
+                    <i data-lucide="check-circle" class="text-maroon shrink-0"></i>
+                    <div>
+                        <h4 class="text-white font-bold mb-2">Çalışan Farkındalığı</h4>
+                        <p class="text-gray-500 text-sm">Çalışanlarınızın siber saldırılara karşı bilinçlenmesini sağlarsınız.</p>
+                    </div>
+                </div>
+                <div class="flex gap-6 p-6 rounded-xl bg-cardBg border border-white/5">
+                    <i data-lucide="check-circle" class="text-maroon shrink-0"></i>
+                    <div>
+                        <h4 class="text-white font-bold mb-2">Veri Sızıntısını Önleme</h4>
+                        <p class="text-gray-500 text-sm">Kritik şirket bilgilerinin e-posta yoluyla dışarı çıkmasını engellersiniz.</p>
+                    </div>
+                </div>
+                <div class="flex gap-6 p-6 rounded-xl bg-cardBg border border-white/5">
+                    <i data-lucide="check-circle" class="text-maroon shrink-0"></i>
+                    <div>
+                        <h4 class="text-white font-bold mb-2">Marka İtibarı</h4>
+                        <p class="text-gray-500 text-sm">Domain isminizin kötüye kullanılmasını engelleyerek itibarınızı korursunuz.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TEKLİF FORMU -->
+    <section id="teklif-formu" class="py-24 bg-darkBg relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-1/2 h-full opacity-10 pointer-events-none">
+            <i data-lucide="mail" size="600" class="text-maroon"></i>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <div>
+                    <h2 class="text-4xl font-bold text-white mb-6">Hizmet Teklif Formu</h2>
+                    <p class="text-gray-400 mb-8">AKA Security'nin uzman ekibiyle tanışın ve kurumunuzun siber güvenliğini bir üst seviyeye taşıyın.</p>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4 text-gray-400">
+                            <i data-lucide="phone" class="text-maroon"></i>
+                            <span>+90 (212) 555 00 00</span>
+                        </div>
+                        <div class="flex items-center gap-4 text-gray-400">
+                            <i data-lucide="mail" class="text-maroon"></i>
+                            <span>ugurk@akasecurtity.com.tr</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-cardBg p-10 rounded-3xl border border-white/10 shadow-2xl">
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <input type="text" placeholder="Adınız" class="bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-maroon outline-none transition-all">
+                            <input type="text" placeholder="Soyadınız" class="bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-maroon outline-none transition-all">
+                        </div>
+                        <input type="email" placeholder="E-Posta Adresiniz" class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-maroon outline-none transition-all">
+                        <input type="text" placeholder="Şirket Adı" class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-maroon outline-none transition-all">
+                        <textarea placeholder="Mesajınız" rows="4" class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-maroon outline-none transition-all"></textarea>
+                        <button class="w-full bg-maroon hover:bg-maroon-dark text-white font-bold py-4 rounded-lg transition-all shadow-lg shadow-maroon/20">GÖNDER</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SSS -->
+    <section class="py-24 bg-black">
+        <div class="max-w-3xl mx-auto px-6">
+            <h2 class="text-4xl font-bold text-white text-center mb-16">Sıkça Sorulan Sorular</h2>
+            <div class="space-y-4">
+                <details class="group bg-cardBg rounded-xl border border-white/5 overflow-hidden">
+                    <summary class="flex justify-between items-center p-6 cursor-pointer list-none font-bold text-white hover:bg-white/5 transition-colors">
+                        Oltalama testleri çalışanları zor durumda bırakır mı?
+                        <i data-lucide="chevron-down" class="group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <div class="p-6 text-gray-400 border-t border-white/5">
+                        Hayır, bu testlerin amacı cezalandırmak değil, eğitmek ve farkındalık yaratmaktır. Sonuçlar anonim olarak değerlendirilebilir.
+                    </div>
+                </details>
+                <details class="group bg-cardBg rounded-xl border border-white/5 overflow-hidden">
+                    <summary class="flex justify-between items-center p-6 cursor-pointer list-none font-bold text-white hover:bg-white/5 transition-colors">
+                        SPF, DKIM ve DMARC neden önemlidir?
+                        <i data-lucide="chevron-down" class="group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <div class="p-6 text-gray-400 border-t border-white/5">
+                        Bu protokoller, e-postalarınızın gerçekten sizden geldiğini kanıtlar ve başkalarının sizin adınıza sahte e-posta göndermesini engeller.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black py-20 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div class="col-span-1 md:col-span-2">
+                    <a href="../index.html" class="flex items-center gap-2 mb-6">
+                        <img src="../logo/logo.png" alt="AKA Security Logo" class="h-10 w-auto" referrerPolicy="no-referrer">
+                        <span class="text-2xl font-bold tracking-tighter text-white">AKA <span class="text-maroon">SECURITY</span></span>
+                    </a>
+                    <p class="text-gray-500 max-w-sm mb-8">Siber güvenlikte uzman kadromuz ve yenilikçi çözümlerimizle kurumunuzu geleceğin tehditlerine karşı hazırlıyoruz.</p>
+                    <div class="flex gap-4">
+                        <a href="https://www.linkedin.com/company/aka-security/" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-cardBg rounded-full flex items-center justify-center text-gray-400 hover:bg-maroon hover:text-white transition-all">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-cardBg rounded-full flex items-center justify-center text-gray-400 hover:bg-maroon hover:text-white transition-all">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-6">Hizmetler</h4>
+                    <ul class="space-y-4 text-gray-500 text-sm">
+                        <li><a href="sizma-testi.html" class="hover:text-maroon transition-colors">Sızma Testi</a></li>
+                        <li><a href="red-teaming.html" class="hover:text-maroon transition-colors">Red Teaming</a></li>
+                        <li><a href="mail-security.html" class="hover:text-maroon transition-colors">Mail Security</a></li>
+                        <li><a href="network-security.html" class="hover:text-maroon transition-colors">Network Security</a></li>
+                        <li><a href="system-security.html" class="hover:text-maroon transition-colors">System Security</a></li>
+                        <li><a href="soc-mdr.html" class="hover:text-maroon transition-colors">SOC & MDR</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-6">Kurumsal</h4>
+                    <ul class="space-y-4 text-gray-500 text-sm">
+                        <li><a href="../index.html#about" class="hover:text-maroon transition-colors">Hakkımızda</a></li>
+                        <li><a href="#" class="hover:text-maroon transition-colors">Kariyer</a></li>
+                        <li><a href="../index.html#contact" class="hover:text-maroon transition-colors">İletişim</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-white/5 flex flex-col md:row justify-between items-center gap-4">
+                <p class="text-gray-600 text-xs">© 2026 AKA Security • Tüm Hakları Saklıdır.</p>
+                <div class="flex gap-6 text-gray-600 text-xs">
+                    <a href="#" class="hover:text-white transition-colors">KVKK</a>
+                    <a href="#" class="hover:text-white transition-colors">Gizlilik Politikası</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        
+        // Form Gönderimi Geri Bildirimi
+        const contactForm = document.querySelector('form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const btn = contactForm.querySelector('button');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = 'GÖNDERİLDİ!';
+                btn.classList.remove('bg-maroon');
+                btn.classList.add('bg-green-600');
+                contactForm.reset();
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.classList.remove('bg-green-600');
+                    btn.classList.add('bg-maroon');
+                }, 3000);
+            });
+        }
+    </script>
+</body>
+</html>
